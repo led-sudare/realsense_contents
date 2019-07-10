@@ -3,7 +3,6 @@ FROM debian:stretch
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 libxext6 libxrender-dev udev build-essential libc6-dev\
     libjpeg-dev libtiff5-dev  \
-    #    libjasper-dev libpng12-dev \
     libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
     libxvidcore-dev libx264-dev \
     libusb-1.0-0-dev \
@@ -13,7 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     pkg-config \
     python python-pip libczmq-dev \
-    python-setuptools \
+    python-dev python-setuptools \
+    python-numpy python-imaging libopencv-dev python-opencv \
     && rm -rf /var/lib/apt/lists/*
 
 RUN cd /tmp && mkdir opencv && cd opencv && \
@@ -30,17 +30,11 @@ RUN mkdir build && cd build && pwd && \
     cmake .. && make && make install
 
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python-dev \
-    && rm -rf /var/lib/apt/lists/* && \
-    python --version && \
-    pip install pillow && \
-    pip install numpy && \
-    pip install opencv-python && \
-    pip install pyzmq && \
-    pip install pyserial && \
-    pip install cython && \
-    pip install pyrealsense==2.0
+RUN python --version && \
+    pip install pyzmq --no-cache-dir && \
+    pip install pyserial --no-cache-dir && \
+    pip install cython --no-cache-dir && \
+    pip install pyrealsense==2.0 --no-cache-dir
 
 WORKDIR /work/
 
