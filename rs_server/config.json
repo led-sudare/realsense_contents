@@ -1,0 +1,8 @@
+{
+    "//comment": "Realsense PUB.",
+    "RealSense": "192.168.1.12:5501",
+    "//RealSense": "0.0.0.0:5501",
+    "//comment": "For Adapter",
+    "Adapter": "192.168.1.12:5520",
+    "//Adapter": "0.0.0.0:5520"
+}
